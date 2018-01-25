@@ -34,9 +34,9 @@ class Rectangle(location: Point, w: Double, h: Double, formatting: Formatting)
 
   def perimeter: Double = 2 * (w + h)
 
-  def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineRectangle(location.x, location.y, w, h)
+  protected def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineRectangle(location.x, location.y, w, h)
 
-  def fillOutline(canvas: FigureCanvas): Unit = canvas.fillRectangle(location.x, location.y, w, h)
+  protected def fillOutline(canvas: FigureCanvas): Unit = canvas.fillRectangle(location.x, location.y, w, h)
 }
 
 class Square(location: Point, w: Double, formatting: Formatting) extends Rectangle(location, w, w, formatting)
@@ -47,9 +47,9 @@ class Ellipse(location: Point, hr: Double, vr: Double, formatting: Formatting)
 
   def perimeter: Double = 2 * Math.PI * Math.sqrt((hr * hr + vr * vr) / 2)
 
-  def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineEclipse(location.x, location.y, hr, vr)
+  protected def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineEclipse(location.x, location.y, hr, vr)
 
-  def fillOutline(canvas: FigureCanvas): Unit = canvas.fillEclipse(location.x, location.y, hr, vr)
+  protected def fillOutline(canvas: FigureCanvas): Unit = canvas.fillEclipse(location.x, location.y, hr, vr)
 }
 
 class Circle(location: Point, r: Double, formatting: Formatting) extends Ellipse(location, r, r, formatting)
