@@ -1,3 +1,5 @@
+package geom
+
 import java.awt.Color
 
 import moodsdesign.cw.provd.FigureCanvas
