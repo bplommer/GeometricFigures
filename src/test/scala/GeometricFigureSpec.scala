@@ -6,8 +6,6 @@ import org.scalatest.{FlatSpec, Matchers}
 
 class GeometricFigureSpec extends FlatSpec with Matchers with MockFactory {
   val formatting = Formatting(Color.BLACK, Color.BLACK, isFilled = false)
-  val filledFormatting = Formatting(Color.BLACK, Color.RED, isFilled = true)
-
   "The rectangle constructor" should "throw an IllegalArgumentException if the width is negative" in {
     an [IllegalArgumentException] should be thrownBy new Rectangle(Point(1,1), -1, 2, formatting)
   }
@@ -41,7 +39,7 @@ class GeometricFigureSpec extends FlatSpec with Matchers with MockFactory {
 
   it should "draw a filled-in rectangle" in {
    val canvas = stub[FigureCanvas]
-    val rectangle = new Rectangle(Point(2,2), 3, 4, filledFormatting)
+    val rectangle = new Rectangle(Point(2,2), 3, 4, Formatting(Color.BLACK, Color.RED, isFilled = true))
 
     rectangle.draw(canvas)
 
@@ -55,7 +53,7 @@ class GeometricFigureSpec extends FlatSpec with Matchers with MockFactory {
 
   "Square.draw" should "draw a filled-in square" in {
     val canvas = stub[FigureCanvas]
-    val rectangle = new Square(Point(2,2), 3, filledFormatting)
+    val rectangle = new Square(Point(2,2), 3, Formatting(Color.BLACK, Color.RED, isFilled = true))
 
     rectangle.draw(canvas)
 
