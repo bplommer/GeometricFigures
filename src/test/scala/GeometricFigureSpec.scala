@@ -71,4 +71,32 @@ class GeometricFigureSpec extends FlatSpec with Matchers with MockFactory {
 
     assert(circle.area === 314.159 +- 0.001)
   }
+
+  "Rectangles" should "be equal if their location and dimensions are equal" in {
+    val r1 = new Rectangle(Point(3, 4), 5, 6, Formatting(Color.BLACK, Color.RED, isFilled = true))
+    val r2 = new Rectangle(Point(3, 4), 5, 6, Formatting(Color.CYAN, Color.DARK_GRAY, isFilled = false))
+
+    r1 shouldEqual r2
+  }
+
+  "Rectangles" should "not be equal if their location and dimensions are not equal" in {
+    val r1 = new Rectangle(Point(3, 4), 5, 6, Formatting(Color.BLACK, Color.RED, isFilled = true))
+    val r2 = new Rectangle(Point(3, 5), 5, 6, Formatting(Color.BLACK, Color.RED, isFilled = true))
+
+    r1 shouldNot equal(r2)
+  }
+
+  "Ellipses" should "equal if their location and radius equal" in {
+    val c1 = new Ellipse(Point(3, 4), 10, 8, Formatting(Color.BLACK, Color.RED, isFilled = true))
+    val c2 = new Ellipse(Point(3, 4), 10, 8, Formatting(Color.CYAN, Color.DARK_GRAY, isFilled = false))
+
+    c1 shouldEqual c2
+  }
+
+  "Ellipses" should "not equal if their location or radius not equal" in {
+    val c1 = new Ellipse(Point(3, 4), 10, 8, Formatting(Color.BLACK, Color.RED, isFilled = true))
+    val c2 = new Ellipse(Point(3, 5), 10, 8, Formatting(Color.BLACK, Color.RED, isFilled = true))
+
+    c1 shouldNot equal(c2)
+  }
 }
