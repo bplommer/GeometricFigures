@@ -54,6 +54,12 @@ extends GeometricFigure(location, formatting) {
     state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
   }
 }
+
+object Rectangle {
+
+  def apply(location: Point, w: Double, h: Double, formatting: Formatting): Rectangle =
+    new Rectangle(location, w, h, formatting)
+
 }
 
 class Square(location: Point, w: Double, formatting: Formatting) extends Rectangle(location, w, w, formatting)
