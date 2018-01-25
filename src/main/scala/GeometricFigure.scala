@@ -25,8 +25,8 @@ abstract class GeometricFigure(location: Point, formatting: Formatting) {
   protected def fillOutline(canvas: FigureCanvas): Unit
 }
 
-class Rectangle(location: Point, w: Double, h: Double, formatting: Formatting)
-  extends GeometricFigure(location, formatting) {
+class Rectangle(val location: Point, val w: Double, val h: Double, formatting: Formatting)
+extends GeometricFigure(location, formatting) {
   require(w >= 0)
   require(h >= 0)
 
@@ -37,11 +37,28 @@ class Rectangle(location: Point, w: Double, h: Double, formatting: Formatting)
   protected def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineRectangle(location.x, location.y, w, h)
 
   protected def fillOutline(canvas: FigureCanvas): Unit = canvas.fillRectangle(location.x, location.y, w, h)
+
+  def canEqual(other: Any): Boolean = other.isInstanceOf[Rectangle]
+
+  override def equals(other: Any): Boolean = other match {
+    case that: Rectangle =>
+      (that canEqual this) &&
+      location == that.location &&
+      w == that.w &&
+      h == that.h
+    case _ => false
+  }
+
+  override def hashCode(): Int = {
+    val state = Seq(location, w, h)
+    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
+  }
+}
 }
 
 class Square(location: Point, w: Double, formatting: Formatting) extends Rectangle(location, w, w, formatting)
 
-class Ellipse(location: Point, hr: Double, vr: Double, formatting: Formatting)
+class Ellipse(val location: Point, val hr: Double, val vr: Double, formatting: Formatting)
   extends GeometricFigure(location, formatting) {
   def area: Double = Math.PI * hr * vr
 
@@ -50,6 +67,23 @@ class Ellipse(location: Point, hr: Double, vr: Double, formatting: Formatting)
   protected def drawOutline(canvas: FigureCanvas): Unit = canvas.outlineEclipse(location.x, location.y, hr, vr)
 
   protected def fillOutline(canvas: FigureCanvas): Unit = canvas.fillEclipse(location.x, location.y, hr, vr)
+
+
+  def canEqual(other: Any): Boolean = other.isInstanceOf[Ellipse]
+
+  override def equals(other: Any): Boolean = other match {
+    case that: Ellipse =>
+      (that canEqual this) &&
+        location == that.location &&
+        hr == that.hr &&
+        vr == that.vr
+    case _ => false
+  }
+
+  override def hashCode(): Int = {
+    val state = Seq(location, hr, vr)
+    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
+  }
 }
 
 class Circle(location: Point, r: Double, formatting: Formatting) extends Ellipse(location, r, r, formatting)
