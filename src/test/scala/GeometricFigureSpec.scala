@@ -64,4 +64,11 @@ class GeometricFigureSpec extends FlatSpec with Matchers with MockFactory {
       (canvas.outlineRectangle _ verify(2,2,3,3)).once
     }
   }
+
+  "The area of a circle" should "be correctly calculated" in {
+    val canvas = stub[FigureCanvas]
+    val circle = new Circle(Point(2, 2), 10, Formatting(Color.BLACK, Color.BLACK, isFilled = false))
+
+    assert(circle.area === 314.159 +- 0.001)
+  }
 }
