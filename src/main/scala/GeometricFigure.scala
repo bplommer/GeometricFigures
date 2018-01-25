@@ -13,10 +13,10 @@ abstract class GeometricFigure(location: Point, formatting: Formatting) {
 
   def draw(canvas: FigureCanvas): Unit = {
     if (formatting.isFilled) {
-      canvas.setDrawingColor(formatting.line)
+      canvas.setDrawingColor(formatting.fill)
       fillOutline(canvas)
     }
-    canvas.setDrawingColor(formatting.fill)
+    canvas.setDrawingColor(formatting.line)
     drawOutline(canvas)
   }
 
